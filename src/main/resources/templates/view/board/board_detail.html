@@ -1,0 +1,68 @@
+{% extends "layout/master" %}
+
+{% block title %}
+Home Admin
+{% endblock %}
+
+{% block pageScript %}
+{% endblock %}
+
+{% block content %}
+<div class="col-md-12">
+    {% boardDetail %}
+    <div class="card card-primary card-outline">
+
+        <div class="card-header">
+            <h3 class="card-title">Read Mail</h3>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body p-0">
+
+            <div class="mailbox-read-info">
+                <h5>{boardDetail.title}</h5>
+                <span class="mailbox-read-time float-right">{boardDetail.createdAt}</span></h6>
+            </div>
+            <!-- /.mailbox-read-info -->
+            <div class="mailbox-controls with-border text-center">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default btn-sm" data-container="body" title="Delete">
+                        <i class="far fa-trash-alt"></i>
+                    </button>
+                    <button type="button" class="btn btn-default btn-sm" data-container="body" title="Reply">
+                        <i class="fas fa-reply"></i>
+                    </button>
+                    <button type="button" class="btn btn-default btn-sm" data-container="body" title="Forward">
+                        <i class="fas fa-share"></i>
+                    </button>
+                </div>
+                <!-- /.btn-group -->
+                <button type="button" class="btn btn-default btn-sm" title="Print">
+                    <i class="fas fa-print"></i>
+                </button>
+            </div>
+            <!-- /.mailbox-controls -->
+            <div class="mailbox-read-message">
+                {boardDetail.post}
+            </div>
+            <!-- /.mailbox-read-message -->
+
+        </div>
+
+        <!-- /.card-footer -->
+        <div class="card-footer">
+            <div class="float-right">
+                <button type="button" class="btn btn-default"><i class="fas fa-reply"></i> Reply</button>
+                <button type="button" class="btn btn-default"><i class="fas fa-share"></i> Forward</button>
+            </div>
+            <button type="button" class="btn btn-default"><i class="far fa-trash-alt"></i> Delete</button>
+            <button type="button" class="btn btn-default"><i class="fas fa-print"></i> Print</button>
+        </div>
+        <!-- /.card-footer -->
+    </div>
+    {% end %}
+
+    <!-- /.card -->
+</div>
+
+
+{% endblock %}

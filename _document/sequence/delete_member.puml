@@ -1,0 +1,42 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+title 개인정보 수정
+
+actor 유저 as  user
+
+box
+' participantboard as board
+participant BackEnd as be
+participant DataBase as db
+end box
+
+== after login ==
+user -> be : 회원정보 수정 페이지 진입
+be -> db : member_ut / member_sub_ut 데이터 조회 [user_id / usn]
+db --> be : user 데이터 정보 return
+be -> be : 회원 권한 확인 및 회원 정보에 따른 화면 출력
+be --> user : 회원정보 수정 페이지 출력
+
+user -> be : 회원 탈퇴 클릭 
+be -> be : 유저 요청 검토 JWT / usn / id 등
+be -> db : member_ut is_delete 테이블 업데이트
+be -> db : member_sub_ut 데이터 추가 type == 삭제 요청
+be -> db : member_ht 데이터 생성
+be --> user : 삭제 신청 완료 및 로그아웃
+
+loop 매일 자정
+    be -> db: member_sub_ut type delete 인 데이터 중 created_at 시간 비교하여 가져오기..?
+    db --> be : 일주일 지난 데이터 제공
+    be -> be : user 삭제 데이터 검토
+    be -> db : user 데이터 삭제 [member_ut, member_sub_ut]
+    be -> db : member_ht 데이터 생성
+end
+
+
+
+
+
+@enduml

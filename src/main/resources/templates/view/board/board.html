@@ -1,0 +1,69 @@
+{% extends "layout/master" %}
+
+{% block title %}
+Home Admin
+{% endblock %}
+
+{% block pageScript %}
+<script src="/js/board_call.js"></script>
+{% endblock %}
+
+{% block content %}
+<ul class="nav nav-treeview">
+    <li class="nav-item">
+        <button onclick="Board_call.getBoardList()" class="btn btn-primary" id="testbutton">TEST</button>
+    </li>
+</ul>
+
+
+<div class="col-md-12">
+    <div class="card card-primary card-outline">
+        <div class="card-header">
+            <h3 class="card-title">BOARD-PROJECT</h3>
+
+            <div class="card-tools">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" placeholder="Search title...">
+                    <div class="input-group-append">
+                        <div class="btn btn-primary">
+                            <i class="fas fa-search"></i>
+                        </div>
+                    </div>
+                    <div><button onclick="location.href='/board/post/new'" class="btn btn-primary">NEW</button></div>
+                </div>
+            </div>
+            <!-- /.card-tools -->
+        </div>
+        <div class="table-responsive mailbox-messages">
+            <table class="table table-hover table-striped">
+                <tbody>
+                {% for board in boardList %}
+                <tr>
+                    <th scope="row">{{ board.id }}</th>
+                    <td onclick="console.log('Click NickName {{board.nickName}}')">{{ board.nickName }}</td>
+                    <td onclick="location.href='/board/post/{{board.id}}'">{{ board.title }}</td>
+                    <td class="mw-10">{{ board.createdAt }}</td>
+                </tr>
+                {% endfor %}
+<!--                <tr>-->
+<!--                    <td class="board-number"><a>1</a></td>-->
+<!--                    <td class="board-nikname"><a>mark.38</a></td>-->
+<!--                    <td class="board-title"><b>오늘 저녁 메뉴</b></td>-->
+<!--                    <td class="mailbox-date">5 mins ago</td>-->
+<!--                </tr>-->
+<!--                <tr>-->
+<!--                    <td class="board-number"><a>2</a></td>-->
+<!--                    <td class="board-nikname"><a>mark.38</a></td>-->
+<!--                    <td class="board-title"><b>집에가고싶은이유</b></td>-->
+<!--                    <td class="board-create-date">2024-01-29</td>-->
+<!--                </tr>-->
+                </tbody>
+            </table>
+            <!-- /.table -->
+        </div>
+        <!-- /.mail-box-messages -->
+    </div>
+    <!-- /.card-body -->
+    <!-- /.card -->
+</div>
+{% endblock %}

@@ -1,0 +1,89 @@
+@startuml
+'https://docs.google.com/spreadsheets/d/17_o1Sys_XAPWzm45wTlv57WyS9zAWIb-IyHPZO2fBqE/edit#gid=271782268
+
+entity "member_ut" as member_ut {
+  usn : bigint unsigned
+  --
+  user_id : varchar(50)
+  user_pw : varchar(100)
+  nick_name : varchar(50)
+  is_delete : tinyint
+  permission : tinyint
+  created_at : timestamp
+  updated_at : timestamp
+}
+' member_sub)ut 테이블 이름을 명시적을호 준회원 테이블로.
+entity "member_sub_ut" as member_sub_ut {
+  member_sub_ut_id : bigint unsigned
+  --
+  usn : bigint unsigned
+  user_id : varchar(50)
+  user_pw : varchar(100)
+  type : tinyint unsigned
+  created_at : timestamp
+  updated_at : timestamp
+}
+
+entity "member_ht" as member_ht {
+  member_ht_id : bigint unsigned
+  --
+  usn : bigint unsigned
+  before_data : json
+  after_data : json
+  created_at : timestamp
+}
+
+entity "board_ut" as board_ut {
+  board_ut_id : bigint unsigned
+  --
+  usn : bigint unsigned
+  title : varchar(200)
+  post : text 
+  created_at : timestamp
+  updated_at : timestamp
+}
+
+entity "board_ht" as board_ht {
+  board_ht_id : bigint unsigned
+  --
+  board_ut_id : bigint unsigned
+  usn : bigint unsigned
+  before_title : varchar(200)
+  before_post : text 
+  created_at : timestamp
+}
+
+entity "board_delete_ut" as board_delete_ut {
+  board_delete_ut_id : bigint unsigned
+  --
+  board_ut_id : bigint unsigned
+  usn : bigint unsigned
+  title : varchar(200)
+  post : text 
+  comment : json
+  created_at : timestamp
+}
+
+entity "comment_ut" as comment_ut {
+  comment_ut_id : bigint unsigned
+  --
+  usn : bigint unsigned
+  board_ut_id : bigint unsigned
+  parent_ut_id : bigint unsigned
+  comment : varchar(255)
+  created_at : timestamp
+  updated_at : timestamp
+}
+
+
+'--
+member_ut |o..o{ member_sub_ut : usn
+member_ut |o..o{ member_ht : usn
+
+member_ut |o..o{ board_ut : usn
+board_ut |o..o| board_delete_ut : board_ut_id
+board_ut |o..o{ board_ht : board_ut_id
+board_ut |o--o{ comment_ut : board_ut_id
+
+member_ut |o..o{ comment_ut : usn
+@enduml

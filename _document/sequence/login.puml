@@ -1,0 +1,42 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+title 로그인
+
+actor 유저 as  user
+
+box
+participant BackEnd as be
+participant DataBase as db
+end box
+
+user -> be : 게시판 url 접속
+be -> be : 웹 페이지 랜더링
+be --> user : 웹 페이지 출력
+
+user -> be : [ID / PW]로그인 버튼 클릭
+be -> be : [ID / PW] 검사
+be -> db : member_sub_ut 테이블 데이터 조회
+alt member_sub_ut 데이터 존재
+    db --> be : member_sub_ut 데이터
+    opt type == 일반 회원가입 유저 
+        be -> be : 임시 닉네임 생성
+        be --> user : 임시 회원 로그인 승인
+    end
+    opt type == 탈퇴 신청 유저 
+        be --> user : 탈퇴 유저 관련 로그인 차단
+    end
+end
+be -> db : member_ut 테이블 데이터 조회
+db --> be : member 데이터 결과 전송
+be -> be : 로그인 세션 관리 (중복 로그인 등)
+be -> be : JWT 토큰 생성
+be -> be : 게시판 페이지 랜더링
+be --> user : 로그인 승인(JWT토큰, 닉네임, usn 데이터 전달) 및 게시판 페이지 출력
+
+
+
+
+@enduml

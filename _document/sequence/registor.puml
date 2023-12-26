@@ -1,0 +1,54 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+title 회원 가입
+
+actor 유저 as  user
+
+box
+participant BackEnd as be
+participant DataBase as db
+end box
+
+be --> be : 최초 접속 페이지 랜더링
+user -> be : url을 통하여 접속 및 회원가입 버튼 클릭
+be --> user : 회원가입 페이지 출력
+
+user -> be : ID 입력 및 중복확인
+be -> be : ID 체크
+be -> db : member_ut / member_sub_ut ID 중복 확인 체크
+db --> be : 데이터 정보 return
+be -> be : 데이터 중복성 없음 체크
+be --> user : 중복결과 전송
+
+' user -> be : nick_name 입력 및 중복확인
+' be -> be : nick_name 체크
+' be -> db : member_ut nick_name 중복 확인 체크
+' db --> be : 데이터 정보 return
+' be -> be : 데이터 중복성 없음 체크
+' be --> user : 중복결과 전송
+
+user -> be : 회원가입 신청
+be -> be : 데이터 체크
+be ->> db : member_sub_ut 신규 유저 데이터 생성
+be --> user : 로그인 페이지로 이동
+
+== 정규 회원 전환 ==
+user -> be : 회원정보 수정 페이지 진입
+be -> db : member_ut / member_sub_ut 데이터 조회 [user_id / usn]
+db --> be : user 데이터 정보 return
+be -> be : 회원 권한 확인 및 임시회원에 따른 화면 출력
+be --> user : 회원정보 수정 페이지 출력
+user -> be : 정회원 전환 신청
+be -> db : member_ut 테이블 해당 유저 조회
+be -> db : member_sub_ut 데이터 삭제 member_ut 데이터 신규 추가 (임시 nick_name -> nickname 으로 사용)
+be -> db : member_ht 데이터 생성
+be --> user : 회원정보 수정 완료
+
+
+
+
+
+@enduml

@@ -1,0 +1,48 @@
+GET Method [조회]
+#  - member_ut 테이블 조회기능
+ - member_ut 중 usn / id 로 가져오는 기능
+#  - member_ut 전체 카운트 가져오는 기능
+
+#  - member_sub_ut 테이블 조회 기능
+ - member_sub_ut 중 usn / id 로 가져오는 기능
+#  - member_sub_ut 전체 카운트 가져오는 기능
+ - member_sub_ut 중 type 별 데이터 가져오는 기능
+
+ - board_ut 테이블 가져오는 기능 (페이징 처리)
+ - board_ut 테이블 중 usn 을 기준으로 가져오는 기능 (게시글 모아보기 기능)
+ - board_ut 테이블 중 title을 기준으로 가져오는 기능 (게시글 검색...?)
+ - board_ht 테이블 중 board_ut_id 기준으로 가져오는 기능 (수정 이력 조회)
+#  - board_delete_ut 테이블 중 board_ut_id 기준으로 가져오는 기능 [admin tool?]
+ - comment_ut 테이블 중 board_ut_id 기준으로 parrent_id를 포함하여 가져오는 기능
+ - comment_ut 테이블 중 usn 기준으로 가져오는 기능
+ [어드민 API?]
+- member_ht 테이블 조회 기능 (페이징 처리)
+
+PUT Method [업데이트]
+ - comment_ut 업데이트 하는 기능
+ - board_ut 업데이트 하는기능
+ - member_ut 업데이트 하는 기능
+ - memeber_sub_ut 업데이트 하는 기능
+
+ - member_sub_ut 삭제하고, member_ut 생성하는 기능(정회원 전환 기능)
+ - member_ut is_delete 업데이트 하는 기능
+POST Method [생성]
+ - member_sub_ut 생성하는 기능 (회원가입)
+ - board_ut 게시판 신규 생성하는 기능
+ - comment_ut 댓글 신규 작성하는 기능
+
+Delete Method [삭제]
+ - board_ut 게시판 삭제하는 기능
+ - comment_ut 댓글 삭제하는 기능
+
+
+----------------------------------------------------------------------------------------------------------------
+ API List
+ 로그인 화면
+ [POST] Check Invalid : 회원가입시 중복확인 항목. ID를 중복확인하여 중복 가입 방지 : Return Boolean. true/false
+ [POST] Register : 중복확인 이후 회원가입을 가능하도록 하여, 회원가입 시작 DB에 바로 작성 : Return Boolean. true/false
+ [POST] Login : ID / PW 기준으로 로그인 기능. Return : Object [id/pw/id_delete/permission/nickname]
+
+ 회원정보 수정 화면
+ [PUT] 정회원 전환 : 준회원의 회원을 정회원으로 전환하는 기능. invalid 체크: associate 테이블에 데이터가 있고, member_ut table에 데이터가 없어야 함. -> member_ut 테이블에 associate 테이블 기준의 데이터를 생성하고, associate 테이블 데이터 삭제.
+ [PUT] 회원정보 업데이트: member_ut 테이블에서 유저 데이터 불러와서 permission 을 체크, (데이터 없으면 준회원 유저)

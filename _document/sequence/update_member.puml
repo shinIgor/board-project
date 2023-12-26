@@ -1,0 +1,37 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+autonumber
+
+title 개인정보 수정
+
+actor 유저 as  user
+
+box
+participant BackEnd as be
+participant DataBase as db
+end box
+== after login ==
+user -> be : 회원정보 수정 페이지 진입
+be -> db : member_ut / member_sub_ut 데이터 조회 [user_id / usn]
+db --> be : user 데이터 정보 return
+be -> be : 회원 권한 확인 및 회원 정보에 따른 화면 출력
+be --> user : 회원정보 수정 페이지 출력
+
+user -> be : 회원 정보 변경 사항 입력
+alt 중복확인 데이터 수정시
+    user -> be : 중복확인 데이터 입력 및 중복확인
+    be -> be : 중복확인 데이터 체크
+    be -> db : member_ut 중복확인 데이터 중복 확인 체크
+    db --> be : 데이터 정보 return
+    be -> be : 데이터 중복성 없음 체크
+    be --> user : 중복결과 전송
+end
+be -> be : 유저 요청 검토 JWT / usn / id 체크 및 null 데이터
+be -> db : member_ut 데이터 수정
+be -> db : member_ht 데이터 생성
+be -> be : 변경된 데이터 기준으로 JWT 신규 발급 (닉네임, permission 등)
+be --> user : 회원수정 완료 및 변경된 JWT 토큰 및 데이터 제공
+
+
+@enduml

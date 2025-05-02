@@ -26,13 +26,14 @@ public class BoardServiceImpl implements BoardService {
         PreContionalUtil.valid(param);
 
         Pageable pageable = param.makePageable();
-        return boardUtRepository.getBoardList(pageable);
+//        return boardUtRepository.getBoardList(pageable);
+        return null;
     }
 
     @Override
     public BoardPostDetailResponse getBoardPostDetail(BigInteger boardId) {
         PreContionalUtil.valid(boardId);
-
-        return boardUtRepository.getBoardList(boardId);
+        return null;
+//        return boardUtRepository.getBoardList(boardId);
     }
 }

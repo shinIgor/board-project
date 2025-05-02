@@ -1,7 +1,7 @@
 package com.example.boardproject.application.service.impl;
 
-import com.example.boardproject.application.model.repository.AssociateUtRepository;
-import com.example.boardproject.application.model.repository.MemberUtRepository;
+import com.example.boardproject.application.model.repository.UserActiveLtRepository;
+import com.example.boardproject.application.model.repository.AccountUtRepository;
 import com.example.boardproject.application.model.transfer.Request.DuplicateKeywordRequest;
 import com.example.boardproject.application.model.transfer.Response.AssociateUserResponse;
 import com.example.boardproject.application.model.transfer.Response.LoginResponse;
@@ -17,30 +17,29 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @RequiredArgsConstructor
 public class MemberServiceImpl implements MemberService {
-    private final MemberUtRepository memberUtRepository;
-    private final AssociateUtRepository associateUtRepository;
+    private final AccountUtRepository accountUtRepository;
+    private final UserActiveLtRepository userActiveLtRepository;
 
 
     @Override
     public boolean checkValid(DuplicateKeywordRequest param) {
         PreContionalUtil.valid(param);
 
-        return memberUtRepository.checkValid(param);
+        return accountUtRepository.checkValid(param);
     }
 
     public LoginResponse loginUser(UserDataDto param) {
         PreContionalUtil.valid(param);
 
-        LoginResponse loginResponse = memberUtRepository.loginUser(param);
+        LoginResponse loginResponse = accountUtRepository.loginUser(param);
 
         if (loginResponse == null) {
-            AssociateUserResponse associateUserResponse = associateUtRepository.loginAssociate(param);
+            AssociateUserResponse associateUserResponse = userActiveLtRepository.loginAssociate(param);
             if (associateUserResponse == null) {
                 // TODO 회원정보 없음 처리.
             }
             loginResponse.setUserId(associateUserResponse.getUserId());
             loginResponse.setNickName("temp"+associateUserResponse.getUsn());
-            loginResponse.setIsDelete(associateUserResponse.getType() == 2);
             loginResponse.setPermission(0);
         }
 

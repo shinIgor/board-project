@@ -4,7 +4,7 @@ import com.example.boardproject.application.model.transfer.Request.DuplicateKeyw
 import com.example.boardproject.application.model.transfer.Response.LoginResponse;
 import com.example.boardproject.application.model.transfer.Dto.UserDataDto;
 
-public interface QMemberUtRepository {
+public interface QAccountUtRepository {
     Boolean checkValid(DuplicateKeywordRequest param);
 
     LoginResponse loginUser(UserDataDto param);

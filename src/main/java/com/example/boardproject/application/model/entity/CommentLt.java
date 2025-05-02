@@ -9,7 +9,6 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
-import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigInteger;
@@ -18,31 +17,22 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @NoArgsConstructor
-@SuperBuilder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "board_delete_ht")
-public class BoardDeleteHt {
+@Table(name = "comment_ut")
+public class CommentLt{
+
     @Id
-    @Column(name = "board_delete_ht_id")
+    @Column(name = "comment_lt_id")
     BigInteger id;
 
-    @Column(name = "board_ut_id")
+    @Column(name = "comment_ut_id")
     BigInteger boardUtId;
 
-    @Column(name = "usn")
-    BigInteger usn;
-
-    @Size(max = 200)
-    @Column(name = "title", length = 200)
-    String title;
-
-    @Column(name = "post")
-    String post;
-
-    @Column(name = "comment")
-    String comment;
+    @Column(name = "before_data")
+    String beforeData;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false)
     LocalDateTime createdAt;
+
 }

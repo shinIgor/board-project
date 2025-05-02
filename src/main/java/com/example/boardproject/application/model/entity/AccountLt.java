@@ -7,8 +7,10 @@ import jakarta.persistence.Table;
 
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigInteger;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -16,19 +18,21 @@ import java.math.BigInteger;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "member_ht")
+@Table(name = "account_lt")
 
-public class MemberHt extends BaseEntity{
+public class AccountLt{
     @Id
-    @Column(name = "member_ht_id")
+    @Column(name = "account_lt_id")
     BigInteger id;
 
-    @Column(name = "usn")
-    BigInteger usn;
+    @Column(name = "account_ut_id")
+    BigInteger accountUtId;
 
     @Column(name = "before_data")
     String beforeData;
 
-    @Column(name = "after_data")
-    String afterData;
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false)
+    LocalDateTime createdAt;
+
 }

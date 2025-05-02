@@ -1,13 +1,12 @@
 package com.example.boardproject.application.model.repository.querydsl;
 
-import com.example.boardproject.application.model.transfer.Request.MemberRegistRequest;
+import com.example.boardproject.application.model.transfer.Request.AccountRegisterRequest;
 import com.example.boardproject.application.model.transfer.Response.AssociateUserResponse;
 import com.example.boardproject.application.model.transfer.Dto.UserDataDto;
-import jakarta.validation.constraints.NotNull;
 
-public interface QAssociateUtRepository {
+public interface QUserActiveLtRepository {
 
-    Boolean registerUser(MemberRegistRequest memberRegistRequest);
+    Boolean registerUser(AccountRegisterRequest memberRegistRequest);
 
     AssociateUserResponse loginAssociate(UserDataDto userDataDto);
 }

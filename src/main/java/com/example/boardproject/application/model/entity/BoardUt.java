@@ -25,17 +25,13 @@ public class BoardUt extends BaseEntity {
     @Column(name = "board_ut_id")
     BigInteger id;
 
-    @Column(name = "usn")
-    BigInteger usn;
+    @Column(name = "owner_user_id")
+    BigInteger ownerUserId;
 
     @Size(max = 200)
-    @Column(name = "title", length = 200)
-    String title;
+    @Column(name = "board_name", length = 200)
+    String boardName;
 
-    @Column(name = "post")
-    String post;
-
-    @CreationTimestamp
-    @Column(name = "created_at", nullable = false)
-    LocalDateTime createdAt;
+    @Column(name = "board_post")
+    String boardPost;
 }

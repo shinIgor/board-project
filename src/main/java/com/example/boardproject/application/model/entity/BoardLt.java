@@ -10,31 +10,30 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigInteger;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
 @NoArgsConstructor
 @SuperBuilder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@Table(name = "board_ht")
-public class BoardHt {
+@Table(name = "board_lt")
+public class BoardLt {
     @Id
-    @Column(name = "board_ht_id")
+    @Column(name = "board_lt_id")
     BigInteger id;
 
     @Column(name = "board_ut_id")
     BigInteger boardUtId;
 
-    @Column(name = "usn")
-    BigInteger usn;
+    @Column(name = "before_data")
+    String beforeData;
 
-    @Size(max = 200)
-    @Column(name = "title", length = 200)
-    String title;
-
-    @Column(name = "post")
-    String post;
+    @CreationTimestamp
+    @Column(name = "created_at", nullable = false)
+    LocalDateTime createdAt;
 
 }

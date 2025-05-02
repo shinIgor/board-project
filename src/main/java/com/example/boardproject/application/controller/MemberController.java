@@ -1,6 +1,6 @@
 package com.example.boardproject.application.controller;
 
-import com.example.boardproject.application.model.transfer.Request.MemberRegistRequest;
+import com.example.boardproject.application.model.transfer.Request.AccountRegisterRequest;
 import com.example.boardproject.application.model.transfer.Response.BaseResponse;
 import com.example.boardproject.application.model.transfer.Request.DuplicateKeywordRequest;
 import com.example.boardproject.application.model.transfer.Response.LoginResponse;
@@ -24,7 +24,7 @@ public class MemberController {
     }
 
     @PostMapping("/register")
-    public BaseResponse<Boolean> createMember (@Valid @RequestBody MemberRegistRequest param){
+    public BaseResponse<Boolean> createMember (@Valid @RequestBody AccountRegisterRequest param){
         return BaseResponse.success(associateService.registerUser(param));
     }
 

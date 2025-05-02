@@ -1,6 +1,6 @@
 package com.example.boardproject.application.model.transfer.Request;
 
-import com.example.boardproject.application.model.entity.MemberUt;
+import com.example.boardproject.application.model.entity.AccountUt;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -14,7 +14,7 @@ import java.util.Optional;
 @Data
 @Accessors(chain = true)
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class MemberLoginRequest {
+public class AccountLoginRequest {
     @NotNull
     String userId;
     @NotNull
@@ -22,17 +22,16 @@ public class MemberLoginRequest {
     @NotNull
     Boolean isDuplicate;
 
-    public MemberUt pick(MemberUt model) {
+    public AccountUt pick(AccountUt model) {
         Optional.ofNullable(model)
                 .ifPresent(e -> {
                     e.setUserId(userId);
-                    e.setUserPw(userPw);
                 });
         return model;
     }
 
-    public Example<MemberUt> makeExample() {
+    public Example<AccountUt> makeExample() {
         ExampleMatcher matcher = ExampleMatcher.matchingAll();
-        return Example.of(pick(new MemberUt()), matcher);
+        return Example.of(pick(new AccountUt()), matcher);
     }
 }

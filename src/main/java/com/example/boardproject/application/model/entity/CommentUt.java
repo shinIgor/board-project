@@ -24,14 +24,14 @@ public class CommentUt extends BaseEntity{
     @Column(name = "comment_ut_id")
     BigInteger id;
 
-    @Column(name = "usn")
-    BigInteger usn;
-
     @Column(name = "board_ut_id")
     BigInteger boardUtId;
 
-    @Column(name = "parent_id")
-    BigInteger parentId;
+    @Column(name = "parent_comment_ut_id")
+    BigInteger parentCommentUtId;
+
+    @Column(name = "owner_user_id")
+    BigInteger ownerUserId;
 
     @Size(max = 255)
     @Column(name = "comment")

@@ -1,8 +1,7 @@
 package com.example.boardproject.application.service.impl;
 
-import com.example.boardproject.application.model.repository.AssociateUtRepository;
-import com.example.boardproject.application.model.transfer.Dto.UserDataDto;
-import com.example.boardproject.application.model.transfer.Request.MemberRegistRequest;
+import com.example.boardproject.application.model.repository.UserActiveLtRepository;
+import com.example.boardproject.application.model.transfer.Request.AccountRegisterRequest;
 import com.example.boardproject.application.model.type.ErrorMessageType;
 import com.example.boardproject.application.service.AssociateService;
 import com.example.boardproject.application.util.CommonException;
@@ -16,17 +15,17 @@ import org.springframework.transaction.annotation.Transactional;
 @Slf4j
 @RequiredArgsConstructor
 public class AssociateServiceImpl implements AssociateService {
-    private final AssociateUtRepository associateUtRepository;
+    private final UserActiveLtRepository userActiveLtRepository;
 
     @Override
     @Transactional
-    public boolean registerUser(MemberRegistRequest memberRegistRequest){
+    public boolean registerUser(AccountRegisterRequest memberRegistRequest){
         PreContionalUtil.valid(memberRegistRequest);
 
         if (memberRegistRequest.getIsDuplicate()){
             throw new CommonException(ErrorMessageType.DUPLICATE_PARAMETER);
         }
-        return associateUtRepository.registerUser(memberRegistRequest);
+        return userActiveLtRepository.registerUser(memberRegistRequest);
     }
 
 //    @Override

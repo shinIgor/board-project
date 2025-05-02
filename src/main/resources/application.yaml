@@ -1,0 +1,38 @@
+application:
+  timezone: UTC
+  locale: en
+
+  spring:
+    application:
+      name: board-project
+    web:
+      locale: en_US
+      messages: messages/messages
+      encoding: UTF-8
+    jpa:
+      hibernate:
+        ddl-auto: none
+    http:
+      multipart:
+        enabled: true
+    servlet:
+      multipart:
+        enabled: true
+        max-file-size: 10MB
+        max-request-size: 10MB
+logging:
+  level:
+    root: info
+debug: false
+
+# DB Setting
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: board_user
+    password: board_user
+    connection-test-query: SELECT 1
+    minimum-idle: 5
+    maximum-pool-size: 5
+    url: jdbc:mysql://localhost:3306/board_project?allowMultiQueries=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC&cacheCallableStmts=true&autoReconnect=true&zeroDateTimeBehavior=CONVERT_TO_NULL&allowPublicKeyRetrieval=true
+

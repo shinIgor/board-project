@@ -1,24 +1,26 @@
 package com.example.boardproject.application.model.transfer.Response;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
+import com.example.boardproject.application.model.entity.AccountUt;
+import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import java.math.BigInteger;
+import java.util.Objects;
 
-@Data
+@Getter
 @FieldDefaults(level = AccessLevel.PRIVATE)
-@AllArgsConstructor
-@NoArgsConstructor
-@Accessors(chain = false)
 public class LoginResponse {
     BigInteger usn;
     String userId;
     String nickName;
-    Integer permission;
 
+    public static LoginResponse of(AccountUt param) {
+        LoginResponse result = new LoginResponse();
+        if (Objects.isNull(param)) return result;
 
+        result.usn = param.getId();
+        result.userId = param.getUserId();
+        result.nickName = param.getNickName();
+        return result;
+    }
 }

@@ -9,6 +9,5 @@ import java.math.BigInteger;
 
 @Repository
 public interface UserActiveLtRepository extends JpaRepository<UserActiveLt, BigInteger>, QUserActiveLtRepository {
-    UserActiveLt findByUserId(String userId);
 
 }

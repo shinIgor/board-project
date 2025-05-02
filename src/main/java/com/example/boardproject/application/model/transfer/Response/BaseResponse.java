@@ -14,5 +14,12 @@ public class BaseResponse<T> {
     BaseError error;
     T payload;
 
+    public static <T> BaseResponse<T> success() {
+        return BaseResponse.of(true, null, null);
+    }
     public static <T> BaseResponse<T> success(T payload){return BaseResponse.of(true, null, payload);}
+    public static <T> BaseResponse<T> fail(BaseError error) {
+        return BaseResponse.of(false, error, null);
+    }
+
 }

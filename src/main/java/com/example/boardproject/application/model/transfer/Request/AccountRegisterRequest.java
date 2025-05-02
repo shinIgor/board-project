@@ -20,7 +20,7 @@ public class AccountRegisterRequest {
     @NotNull
     String userPw;
     @NotNull
-    Boolean isDuplicate;
+    String nickName;
 
     public AccountUt pick(AccountUt model) {
         Optional.ofNullable(model)

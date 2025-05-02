@@ -2,10 +2,8 @@ package com.example.boardproject.application.controller;
 
 import com.example.boardproject.application.model.transfer.Request.AccountRegisterRequest;
 import com.example.boardproject.application.model.transfer.Response.BaseResponse;
-import com.example.boardproject.application.model.transfer.Request.DuplicateKeywordRequest;
 import com.example.boardproject.application.model.transfer.Response.LoginResponse;
 import com.example.boardproject.application.model.transfer.Dto.UserDataDto;
-import com.example.boardproject.application.service.AssociateService;
 import com.example.boardproject.application.service.MemberService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/board/v1/member")
 public class MemberController {
     private final MemberService memberService;
-    private final AssociateService associateService;
 
     @PostMapping("/login")
     public BaseResponse<LoginResponse> login(@Valid @RequestBody UserDataDto param){
@@ -25,12 +22,17 @@ public class MemberController {
 
     @PostMapping("/register")
     public BaseResponse<Boolean> createMember (@Valid @RequestBody AccountRegisterRequest param){
-        return BaseResponse.success(associateService.registerUser(param));
+        return BaseResponse.success(memberService.registerUser(param));
     }
 
-    @PostMapping("/validate")
-    public BaseResponse<Boolean> checkValid(@Valid @RequestBody DuplicateKeywordRequest param){
-        return BaseResponse.success(memberService.checkValid(param));
+    @PostMapping("/register/duplicate")
+    public BaseResponse<Boolean> checkDuplicate(@Valid @RequestBody String userId){
+        return BaseResponse.success(memberService.isDuplicate(userId));
+    }
+
+    @DeleteMapping("/logout")
+    public BaseResponse<Boolean> logout(){
+        return BaseResponse.success(true);
     }
 
     @PutMapping("/update")

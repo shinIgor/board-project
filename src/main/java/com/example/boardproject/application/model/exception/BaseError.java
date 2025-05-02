@@ -9,4 +9,9 @@ import lombok.experimental.FieldDefaults;
 public class BaseError {
     Integer code;
     String message;
+
+    public BaseError(BaseErrorMessage type) {
+        this.code = type.getCode();
+        this.message = type.getMessage();
+    }
 }

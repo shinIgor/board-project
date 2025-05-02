@@ -1,9 +1,6 @@
 package com.example.boardproject.application.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -23,6 +20,7 @@ import java.time.LocalDateTime;
 @Table(name = "board_lt")
 public class BoardLt {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "board_lt_id")
     BigInteger id;
 

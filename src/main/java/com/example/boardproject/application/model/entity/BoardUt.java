@@ -1,9 +1,7 @@
 package com.example.boardproject.application.model.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -22,6 +20,7 @@ import java.time.LocalDateTime;
 @Table(name = "board_ut")
 public class BoardUt extends BaseEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "board_ut_id")
     BigInteger id;
 
@@ -34,4 +33,10 @@ public class BoardUt extends BaseEntity {
 
     @Column(name = "board_post")
     String boardPost;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
+    @JoinColumn(name = "owner_user_id", referencedColumnName = "account_ut_id", insertable = false , updatable = false)
+    AccountUt owner;
+
 }

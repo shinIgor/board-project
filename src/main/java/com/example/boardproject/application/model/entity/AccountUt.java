@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
+import lombok.experimental.SuperBuilder;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -13,6 +14,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -21,6 +23,7 @@ import java.util.List;
 public class AccountUt extends BaseEntity{
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "account_ut_id")
     BigInteger id;
 
@@ -40,8 +43,7 @@ public class AccountUt extends BaseEntity{
     @Column(name = "nick_name", length = 255)
     String nickName;
 
-    @OneToMany(mappedBy = "boardlt", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "owner", fetch = FetchType.LAZY)
     @JsonBackReference
-
     List<BoardUt> boardList;
 }

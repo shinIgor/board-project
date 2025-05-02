@@ -5,6 +5,7 @@ import com.example.boardproject.application.model.transfer.Dto.BoardListDto;
 import com.example.boardproject.application.model.transfer.Request.BasePageRequest;
 import com.example.boardproject.application.model.transfer.Response.BasePageResponse;
 import com.example.boardproject.application.model.transfer.Response.BaseResponse;
+import com.example.boardproject.application.model.transfer.Response.BoardListResponse;
 import com.example.boardproject.application.service.BoardService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +24,7 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping("")
-    public BaseResponse<BasePageResponse<BoardListDto>> getBoardList(@Valid @ModelAttribute BasePageRequest param){
+    public BaseResponse<BasePageResponse<BoardListResponse>> getBoardList(@Valid @ModelAttribute BasePageRequest param){
         return BaseResponse.success(boardService.getBoardList(param));
     }
 

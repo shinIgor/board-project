@@ -29,3 +29,4 @@ replay_pid*
 
 #Java buildFile
 build
+!**/main/generated

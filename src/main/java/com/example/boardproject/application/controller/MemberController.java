@@ -4,7 +4,9 @@ import com.example.boardproject.application.model.transfer.Request.AccountRegist
 import com.example.boardproject.application.model.transfer.Response.BaseResponse;
 import com.example.boardproject.application.model.transfer.Response.LoginResponse;
 import com.example.boardproject.application.model.transfer.Dto.UserDataDto;
+import com.example.boardproject.application.model.transfer.Response.TokenResponse;
 import com.example.boardproject.application.service.MemberService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
@@ -16,8 +18,8 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/login")
-    public BaseResponse<LoginResponse> login(@Valid @RequestBody UserDataDto param){
-        return BaseResponse.success(memberService.loginUser(param));
+    public BaseResponse<TokenResponse> login(@Valid @RequestBody UserDataDto param, HttpServletRequest httpServletRequest){
+        return BaseResponse.success(memberService.loginUser(httpServletRequest,param));
     }
 
     @PostMapping("/register")

@@ -4,13 +4,12 @@ import com.example.boardproject.application.model.entity.AccountUt;
 import lombok.*;
 import lombok.experimental.FieldDefaults;
 
-import java.math.BigInteger;
 import java.util.Objects;
 
 @Getter
 @FieldDefaults(level = AccessLevel.PRIVATE)
 public class LoginResponse {
-    BigInteger usn;
+    Long usn;
     String userId;
     String nickName;
 

@@ -25,7 +25,7 @@ public class AccountUt extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "account_ut_id")
-    BigInteger id;
+    Long id;
 
     @Size(max = 50)
     @Column(name = "user_id", length = 50)
